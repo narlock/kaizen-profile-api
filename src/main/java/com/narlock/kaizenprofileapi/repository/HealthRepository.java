@@ -28,5 +28,5 @@ public interface HealthRepository extends JpaRepository<Health, Integer> {
                      @Param("goalWeight") Double goalWeight,
                      @Param("goalWater") Double goalWater);
 
-    void deleteById(Integer id);
+    void deleteByProfileId(Integer profileId);
 }

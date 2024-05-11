@@ -21,9 +21,9 @@ CREATE TABLE Health(
 );
 
 CREATE TABLE RowInfo (
-    profile_id INT PRIMARY KEY,
+    profile_id INT,
     row_index INT,
     widgets_list MEDIUMTEXT,
-    FOREIGN KEY (profile_id) REFERENCES Profile(id)
+    PRIMARY KEY(profile_id, row_index)
 );
 

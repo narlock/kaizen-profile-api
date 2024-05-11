@@ -1,13 +1,14 @@
 package com.narlock.kaizenprofileapi.service;
 
-import com.narlock.kaizenprofileapi.model.Health;
-import com.narlock.kaizenprofileapi.model.Profile;
-import com.narlock.kaizenprofileapi.model.ProfileRequest;
-import com.narlock.kaizenprofileapi.model.ProfileResponse;
+import com.narlock.kaizenprofileapi.model.*;
 import com.narlock.kaizenprofileapi.model.error.NotFoundException;
 import com.narlock.kaizenprofileapi.repository.HealthRepository;
 import com.narlock.kaizenprofileapi.repository.KaizenProfileRepository;
+
+import java.util.List;
 import java.util.Optional;
+
+import com.narlock.kaizenprofileapi.repository.RowInfoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class KaizenProfileService {
 
   private final KaizenProfileRepository kaizenProfileRepository;
   private final HealthRepository healthRepository;
+  private final RowInfoRepository rowInfoRepository;
 
 
   public ProfileResponse getKaizenProfileById(Integer id) {
@@ -68,5 +70,28 @@ public class KaizenProfileService {
             .profile(responseProfile)
             .health(responseHealth)
             .build();
+  }
+
+  public void deleteProfileById(Integer id) {
+    healthRepository.deleteById(id);
+    kaizenProfileRepository.deleteById(id);
+  }
+
+  public List<RowInfo> saveRowInfo(Integer id, RowInfoRequest request) {
+    rowInfoRepository.saveRowInfo(id, request.getRowIndex(), request.getWidgets());
+    return getRowInfoById(id);
+  }
+
+  public List<RowInfo> getRowInfoById(Integer id) {
+    return rowInfoRepository.findByProfileIdNative(id);
+  }
+
+  public List<RowInfo> updateRowInfo(Integer id, RowInfoRequest request) {
+    rowInfoRepository.updateRowInfo(id, request.getRowIndex(), request.getWidgets());
+    return getRowInfoById(id);
+  }
+
+  public void deleteRowInfo(Integer id, Integer rowIndex) {
+    rowInfoRepository.delete(RowInfo.builder().profileId(id).rowIndex(rowIndex).build());
   }
 }
