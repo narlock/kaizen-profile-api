@@ -1,4 +1,4 @@
-# USE <your_database_name>
+# USE <your_database_name>;
 
 CREATE TABLE Profile(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

@@ -4,15 +4,22 @@
 ![Spring Boot 3](https://img.shields.io/badge/spring_boot_3-%236DB33F.svg?style=for-the-badge&logo=spring-boot&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
-**Kaizen Profile API** is a microservice for managing user profiles and associated row information. This project's purpose is to offer a straightforward integration for those seeking to manage profiles with additional structured data. The core application is developed in [Java](https://www.java.com/), utilizing the [Spring Boot](https://spring.io/projects/spring-boot) framework. The application uses [Spring Data JPA](https://spring.io/projects/spring-data-jpa) to interact with a [MySQL](https://www.mysql.com/) database.
+**Kaizen Profile API** is a microservice for managing [KaizenLAN](https://github.com/narlock/KaizenLAN) user profiles and associated widget row information. This project's purpose is to provide a simple API to integrate with this data. The core application is developed in [Java](https://www.java.com/), utilizing the [Spring Boot](https://spring.io/projects/spring-boot) framework. The application uses [Spring Data JPA](https://spring.io/projects/spring-data-jpa) to interact with a [MySQL](https://www.mysql.com/) database.
 
 ## Requirements to Run
 
 This section assumes the user is familiar with installing Java 17 and running Maven-based Java applications. It also assumes knowledge of installing and configuring a MySQL database server.
-- **MySQL**: With MySQL running, configure and run the `setup_database.sql` script to create the **kaizen-db** database.
-- **Run the application**
-    - Using **Java 17**: After building the application, navigate to the directory of the jar in a terminal and use `java -jar kaizen-profile-api.jar` to run the application.
-    - Using **Maven**: In a terminal, use `mvn spring-boot:run` to run the application.
+
+**MySQL Configuration**: Configure the `setup_database.sql` file by including which database are using. 
+```sql
+USE <replace_with_your_database_name>;
+```
+Then, run the script in a MySQL terminal.
+
+
+**Run the application**
+- Using **Java 17**: After building the application, navigate to the directory of the jar in a terminal and use `java -jar kaizen-profile-api.jar` to run the application.
+- Using **Maven**: In a terminal, use `mvn spring-boot:run` to run the application.
 
 ## Relational Database Schema
 
