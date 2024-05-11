@@ -14,6 +14,10 @@ This section assumes the user is familiar with installing Java 17 and running Ma
     - Using **Java 17**: After building the application, navigate to the directory of the jar in a terminal and use `java -jar kaizen-profile-api.jar` to run the application.
     - Using **Maven**: In a terminal, use `mvn spring-boot:run` to run the application.
 
+## Relational Database Schema
+
+![Relational Database Schema](./README%20Assets/relationaldb.png)
+
 ## API Specification
 
 **Guide**
@@ -24,10 +28,6 @@ This section assumes the user is familiar with installing Java 17 and running Ma
 - [**Save** row information](#save-row-information)
 - [**Update** row information](#update-row-information)
 - [**Delete** row information](#delete-row-information)
-
-## Relational Database Schema
-
-![Relational Database Schema](./README%20Assets/relationaldb.png)
 
 ### Create a profile
 Creates a Profile and Health entry for a Kaizen Profile.
@@ -230,3 +230,8 @@ DELETE /profile/{id}/rowInfo/{index}
 ```json
 HTTP/1.1 204 No Content
 ```
+
+## Testing
+
+> [!NOTE]  
+> This section is currently in progress!
