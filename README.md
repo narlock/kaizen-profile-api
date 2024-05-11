@@ -25,6 +25,10 @@ This section assumes the user is familiar with installing Java 17 and running Ma
 - [**Update** row information](#update-row-information)
 - [**Delete** row information](#delete-row-information)
 
+## Relational Database Schema
+
+![Relational Database Schema](./README%20Assets/relationaldb.png)
+
 ### Create a profile
 Creates a Profile and Health entry for a Kaizen Profile.
 
