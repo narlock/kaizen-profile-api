@@ -20,11 +20,6 @@ public class ProfileRequest {
     @NotEmpty(message = "Name must not be empty")
     private String username;
 
-    @NotNull(message = "Age must not be null")
-    @Min(value = 1, message = "Age must be greater than or equal to 1")
-    private Integer age;
-
-
     @NotNull(message = "Birthdate must not be null")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
@@ -50,7 +45,6 @@ public class ProfileRequest {
         Profile profile = new Profile();
         profile.setId(profileId);
         profile.setUsername(username);
-        profile.setAge(age);
         profile.setBirthDate(birthDate);
         profile.setImageUrl(imageUrl);
         profile.setXp(xp);

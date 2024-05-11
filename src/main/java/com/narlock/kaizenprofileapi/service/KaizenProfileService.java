@@ -27,6 +27,7 @@ public class KaizenProfileService {
     return ProfileResponse.builder()
             .profile(getProfileById(id))
             .health(getHealthByProfileId(id))
+            .rowInfoList(getRowInfoById(id))
             .build();
   }
 

@@ -17,7 +17,6 @@ public class Profile {
   private Integer id;
 
   private String username;
-  private Integer age;
 
   @Column(name = "birth_date")
   private LocalDate birthDate;
