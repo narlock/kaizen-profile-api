@@ -121,4 +121,11 @@ public class KaizenProfileService {
             .rowInfoList(rowInfoRepository.findByProfileIdNative(profile.getId()))
             .build();
   }
+
+  public ProfileResponse addXpToProfile(Integer id, Integer xp) {
+    Profile profile = getProfileById(id);
+    profile.setXp(profile.getXp() + xp);
+    kaizenProfileRepository.save(profile);
+    return getKaizenProfileById(id);
+  }
 }
