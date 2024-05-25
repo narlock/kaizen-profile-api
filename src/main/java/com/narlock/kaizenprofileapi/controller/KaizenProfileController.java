@@ -39,18 +39,24 @@ public class KaizenProfileController {
     return kaizenProfileService.createProfile(request);
   }
 
-  /**
-   * Updates a Profile and Health entry for a Kaizen Profile
-   * @param request
-   * @return
-   */
+//  /**
+//   * Updates a Profile and Health entry for a Kaizen Profile
+//   * @param request
+//   * @return
+//   */
+//  @PutMapping
+//  @ResponseStatus(HttpStatus.OK)
+//  public ProfileResponse updateProfile(@Valid @RequestBody ProfileRequest request) {
+//    if(request.getProfileId() == null) {
+//      throw new BadRequestException("Profile ID must NOT be null when updating an existing profile");
+//    }
+//    return kaizenProfileService.updateProfile(request);
+//  }
+
   @PutMapping
   @ResponseStatus(HttpStatus.OK)
-  public ProfileResponse updateProfile(@Valid @RequestBody ProfileRequest request) {
-    if(request.getProfileId() == null) {
-      throw new BadRequestException("Profile ID must NOT be null when updating an existing profile");
-    }
-    return kaizenProfileService.updateProfile(request);
+  public ProfileResponse updateFullProfile(@RequestBody FullProfileRequest request) {
+    return kaizenProfileService.updateFullProfile(request);
   }
 
   @DeleteMapping("/{id}")

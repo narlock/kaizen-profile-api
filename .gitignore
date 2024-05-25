@@ -166,3 +166,4 @@ src/main/resources/secrets.properties
 .idea/misc.xml
 .idea/vcs.xml
 .idea/uiDesigner.xml
+kaizen-profile-api.iml

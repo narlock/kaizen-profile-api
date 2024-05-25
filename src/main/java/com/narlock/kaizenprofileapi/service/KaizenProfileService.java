@@ -95,4 +95,30 @@ public class KaizenProfileService {
   public void deleteRowInfo(Integer id, Integer rowIndex) {
     rowInfoRepository.delete(RowInfo.builder().profileId(id).rowIndex(rowIndex).build());
   }
+
+  public ProfileResponse updateFullProfile(FullProfileRequest request) {
+    // Update profile details
+    Profile profile = kaizenProfileRepository.saveAndFlush(request.getProfile());
+
+    // Update Health
+    Health healthInput = request.getHealth();
+    if(healthInput.getProfileId() == null) {
+      healthInput.setProfileId(profile.getId());
+    }
+    Health health = healthRepository.saveAndFlush(healthInput);
+
+    for(RowInfo ri : request.getRowInfoList()) {
+      if(ri.getProfileId() == null) {
+        ri.setProfileId(profile.getId());
+      }
+      rowInfoRepository.saveAndFlush(ri);
+    }
+
+    // Return response
+    return ProfileResponse.builder()
+            .profile(profile)
+            .health(health)
+            .rowInfoList(rowInfoRepository.findByProfileIdNative(profile.getId()))
+            .build();
+  }
 }

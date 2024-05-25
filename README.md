@@ -10,14 +10,24 @@
 
 This section assumes the user is familiar with installing Java 17 and running Maven-based Java applications. It also assumes knowledge of installing and configuring a MySQL database server.
 
-**MySQL Configuration**: Configure the `setup_database.sql` file by including which database are using. 
+### **MySQL Configuration**
+Configure the `setup_database.sql` file by including which database are using. 
+
 ```sql
 USE <replace_with_your_database_name>;
 ```
+
 Then, run the script in a MySQL terminal.
 
+### **Create or Validate MySQL properties**
+Create the file in the directory `${user.home}/Documents/narlock/secrets/mysql.properties` if it does not exist, and include your MySQL credentials so that this API can read them from this properties file.
 
-**Run the application**
+```
+lmysql.username=<replace_with_your_mysql_username>
+lmysql.password=<replace_with_your_mysql_password>
+```
+
+### **Run the application**
 - Using **Java 17**: After building the application, navigate to the directory of the jar in a terminal and use `java -jar kaizen-profile-api.jar` to run the application.
 - Using **Maven**: In a terminal, use `mvn spring-boot:run` to run the application.
 
@@ -27,7 +37,6 @@ Then, run the script in a MySQL terminal.
 
 ## API Specification
 
-**Guide**
 - [**Create** a profile](#create-a-profile)
 - [**Update** a profile](#update-a-profile)
 - [**Delete** a profile](#delete-a-profile)
