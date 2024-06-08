@@ -4,12 +4,11 @@ import com.narlock.kaizenprofileapi.model.*;
 import com.narlock.kaizenprofileapi.model.error.BadRequestException;
 import com.narlock.kaizenprofileapi.service.KaizenProfileService;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -27,13 +26,14 @@ public class KaizenProfileController {
 
   /**
    * Creates a Profile and Health entry for a Kaizen Profile
+   *
    * @param request
    * @return
    */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ProfileResponse createProfile(@Valid @RequestBody ProfileRequest request) {
-    if(request.getProfileId() != null) {
+    if (request.getProfileId() != null) {
       throw new BadRequestException("Profile ID must be null when creating a new profile");
     }
     return kaizenProfileService.createProfile(request);
@@ -59,7 +59,8 @@ public class KaizenProfileController {
 
   @PostMapping("/{id}/rowInfo")
   @ResponseStatus(HttpStatus.OK)
-  public List<RowInfo> saveRowInfo(@PathVariable("id") Integer id, @Valid @RequestBody RowInfoRequest request) {
+  public List<RowInfo> saveRowInfo(
+      @PathVariable("id") Integer id, @Valid @RequestBody RowInfoRequest request) {
     return kaizenProfileService.saveRowInfo(id, request);
   }
 
@@ -71,13 +72,15 @@ public class KaizenProfileController {
 
   @PutMapping("/{id}/rowInfo")
   @ResponseStatus(HttpStatus.OK)
-  public List<RowInfo> updateRowInfo(@PathVariable("id") Integer id, @Valid @RequestBody RowInfoRequest request) {
+  public List<RowInfo> updateRowInfo(
+      @PathVariable("id") Integer id, @Valid @RequestBody RowInfoRequest request) {
     return kaizenProfileService.updateRowInfo(id, request);
   }
 
   @DeleteMapping("/{id}/rowInfo/{index}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteRowInfo(@PathVariable("id") Integer id, @PathVariable("index") Integer rowIndex) {
+  public void deleteRowInfo(
+      @PathVariable("id") Integer id, @PathVariable("index") Integer rowIndex) {
     kaizenProfileService.deleteRowInfo(id, rowIndex);
   }
 }

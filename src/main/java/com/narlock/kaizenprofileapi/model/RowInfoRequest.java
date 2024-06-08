@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RowInfoRequest {
 
-    @NotNull(message = "rowIndex must not be null")
-    private Integer rowIndex;
+  @NotNull(message = "rowIndex must not be null")
+  private Integer rowIndex;
 
-    @NotNull(message = "widgets must not be null")
-    private String widgets;
+  @NotNull(message = "widgets must not be null")
+  private String widgets;
 }

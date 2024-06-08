@@ -4,11 +4,9 @@ import com.narlock.kaizenprofileapi.model.*;
 import com.narlock.kaizenprofileapi.model.error.NotFoundException;
 import com.narlock.kaizenprofileapi.repository.HealthRepository;
 import com.narlock.kaizenprofileapi.repository.KaizenProfileRepository;
-
+import com.narlock.kaizenprofileapi.repository.RowInfoRepository;
 import java.util.List;
 import java.util.Optional;
-
-import com.narlock.kaizenprofileapi.repository.RowInfoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,13 +20,12 @@ public class KaizenProfileService {
   private final HealthRepository healthRepository;
   private final RowInfoRepository rowInfoRepository;
 
-
   public ProfileResponse getKaizenProfileById(Integer id) {
     return ProfileResponse.builder()
-            .profile(getProfileById(id))
-            .health(getHealthByProfileId(id))
-            .rowInfoList(getRowInfoById(id))
-            .build();
+        .profile(getProfileById(id))
+        .health(getHealthByProfileId(id))
+        .rowInfoList(getRowInfoById(id))
+        .build();
   }
 
   public Profile getProfileById(Integer id) {
@@ -51,26 +48,28 @@ public class KaizenProfileService {
 
   public ProfileResponse createProfile(ProfileRequest request) {
     Profile responseProfile = kaizenProfileRepository.save(request.getProfile());
-    healthRepository.saveHealth(responseProfile.getId(),
-            request.getHeight(), request.getWeight(), request.getGoalWeight(), request.getGoalWater());
+    healthRepository.saveHealth(
+        responseProfile.getId(),
+        request.getHeight(),
+        request.getWeight(),
+        request.getGoalWeight(),
+        request.getGoalWater());
     Health responseHealth = getHealthByProfileId(responseProfile.getId());
 
-    return ProfileResponse.builder()
-            .profile(responseProfile)
-            .health(responseHealth)
-            .build();
+    return ProfileResponse.builder().profile(responseProfile).health(responseHealth).build();
   }
 
   public ProfileResponse updateProfile(ProfileRequest request) {
     Profile responseProfile = kaizenProfileRepository.save(request.getProfile());
-    healthRepository.updateHealth(responseProfile.getId(),
-            request.getHeight(), request.getWeight(), request.getGoalWeight(), request.getGoalWater());
+    healthRepository.updateHealth(
+        responseProfile.getId(),
+        request.getHeight(),
+        request.getWeight(),
+        request.getGoalWeight(),
+        request.getGoalWater());
     Health responseHealth = getHealthByProfileId(responseProfile.getId());
 
-    return ProfileResponse.builder()
-            .profile(responseProfile)
-            .health(responseHealth)
-            .build();
+    return ProfileResponse.builder().profile(responseProfile).health(responseHealth).build();
   }
 
   public void deleteProfileById(Integer id) {
@@ -102,13 +101,13 @@ public class KaizenProfileService {
 
     // Update Health
     Health healthInput = request.getHealth();
-    if(healthInput.getProfileId() == null) {
+    if (healthInput.getProfileId() == null) {
       healthInput.setProfileId(profile.getId());
     }
     Health health = healthRepository.saveAndFlush(healthInput);
 
-    for(RowInfo ri : request.getRowInfoList()) {
-      if(ri.getProfileId() == null) {
+    for (RowInfo ri : request.getRowInfoList()) {
+      if (ri.getProfileId() == null) {
         ri.setProfileId(profile.getId());
       }
       rowInfoRepository.saveAndFlush(ri);
@@ -116,10 +115,10 @@ public class KaizenProfileService {
 
     // Return response
     return ProfileResponse.builder()
-            .profile(profile)
-            .health(health)
-            .rowInfoList(rowInfoRepository.findByProfileIdNative(profile.getId()))
-            .build();
+        .profile(profile)
+        .health(health)
+        .rowInfoList(rowInfoRepository.findByProfileIdNative(profile.getId()))
+        .build();
   }
 
   public ProfileResponse addXpToProfile(Integer id, Integer xp) {

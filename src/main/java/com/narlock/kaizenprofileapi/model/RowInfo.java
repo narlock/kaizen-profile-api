@@ -3,8 +3,6 @@ package com.narlock.kaizenprofileapi.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
-
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -13,14 +11,14 @@ import java.io.Serializable;
 @Table(name = "RowInfo")
 @IdClass(RowInfoId.class)
 public class RowInfo {
-    @Id
-    @Column(name = "profile_id")
-    private Integer profileId;
+  @Id
+  @Column(name = "profile_id")
+  private Integer profileId;
 
-    @Id
-    @Column(name = "row_index")
-    private Integer rowIndex;
+  @Id
+  @Column(name = "row_index")
+  private Integer rowIndex;
 
-    @Column(name = "widgets_list")
-    private String widgets;
+  @Column(name = "widgets_list")
+  private String widgets;
 }
